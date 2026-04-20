@@ -29,3 +29,19 @@ if and else blocks have a lot of repetition (status_line,contents,length,respons
 the only thing making it different was the filename.
 
 to refactor it we can assign values of status_name and filename to be variables
+
+
+## Reflection 4
+When opening http://127.0.0.1:7878/sleep (regardless of opening 2 or 1 webpage) ,there were 10 seconds of loading.
+During the Pause did not continue the processing request immediately.
+
+because there is a route calls of thread::sleep(Duration::from_secs(10));.
+
+if there is a request of the /sleep page other pages will also get halted to wait for the
+/sleep page to finish.
+and also the handle_connection is called directly inside the loop, so the server process each connection sequentially.
+
+this shows the limitation of a single thread web server. 
+other users may experience delays because of the one user access a slow endpoint.
+
+
