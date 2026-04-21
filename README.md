@@ -64,3 +64,20 @@ on thread pool struct workers are stored on a vector.
 and the sender is the input side of the job queue.
 
 ![commit5](assets/images/commit5.png)
+
+
+
+
+## Bonus
+I used the "#[derive(Debug)]" call and create the Enum of named "PoolCreationError"
+
+And then on the function call of build() the Return value is Result<ThreadPool, PoolCreationError> instead of the ThreadPool Only
+
+On the Main.rs we need to unwrap the pool so that we can get the result from Error or ThreadPool,
+
+The difference of this instead of a panic call is control flow.
+
+if the Code panics it will Stop current execution, if its an Error call it will Return to the caller.
+
+
+
