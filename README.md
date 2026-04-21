@@ -44,4 +44,23 @@ and also the handle_connection is called directly inside the loop, so the server
 this shows the limitation of a single thread web server. 
 other users may experience delays because of the one user access a slow endpoint.
 
+## Reflection 5
+The main idea of the Lib.rs
 
+ThreadPool: Owns multiple workers, owns a sender channel,and sends Jobs into the channel.
+
+Workers: Owns a single thread, and waits for jobs from the shared receiver.
+
+on pool.execute(||{task};)
+the closure is boxed as Job, sent into the channel and one worker receives and executes it.
+
+Arc is used for ownership transfer of the threads.
+
+Mutex is for allowing only one thread is allowed to write data.
+
+mpsc is used to send jobs from ThreadPool to workers.
+
+on thread pool struct workers are stored on a vector.
+and the sender is the input side of the job queue.
+
+![commit5](assets/images/commit5.png)
